@@ -1,12 +1,16 @@
 package com.appledevapp.learning.properties;
 
-import org.springframework.boot.SpringApplication;
+import com.appledevapp.learning.properties.event.AppEnvPreparedEventListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 @SpringBootApplication
 public class SpringbootLearningPropertiesApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringbootLearningPropertiesApplication.class, args);
+        SpringApplicationBuilder application = new SpringApplicationBuilder();
+        application.listeners(new AppEnvPreparedEventListener());
+        application.sources(SpringbootLearningPropertiesApplication.class);
+        application.run(args);
     }
 }
