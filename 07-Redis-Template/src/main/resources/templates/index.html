@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Freemarker Index</title>
+</head>
+<body>
+
+<h5>Payment List</h5>
+
+<#list payMentList as payment>
+    <p>${payment.id}</p>
+    <p>${payment.name}</p>
+    <p>${payment.salary}</p>
+    <br/>
+</#list>
+
+</body>
+</html>
