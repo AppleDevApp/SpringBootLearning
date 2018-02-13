@@ -12,11 +12,6 @@ import java.util.function.Function;
 public class ExcelField {
 
     /**
-     * 字段中文名(列名)
-     */
-    private String cnFieldName;
-
-    /**
      * 字段类型，虚拟字段OR原生字段
      */
     private FieldType fieldType;
@@ -48,36 +43,29 @@ public class ExcelField {
 
     /**
      * 构造函数-原生字段,采用默认的字符格式化
-     *
-     * @param cnFieldName 列名
      */
-    public ExcelField(String cnFieldName) {
+    public ExcelField() {
         this.fieldType = FieldType.NativeField;
-        this.cnFieldName = cnFieldName;
         this.formatFunc = FormatFunc.DEFAULT_FORMAT;
     }
 
     /**
      * 构造函数-原生字段,采用默认的字符格式化
      *
-     * @param cnFieldName 列名
-     * @param formatFunc  格式化函数
+     * @param formatFunc 格式化函数
      */
-    public ExcelField(String cnFieldName, Function<Object, String> formatFunc) {
+    public ExcelField(Function<Object, String> formatFunc) {
         this.fieldType = FieldType.NativeField;
-        this.cnFieldName = cnFieldName;
         this.formatFunc = formatFunc;
     }
 
     /**
      * 构造函数-虚拟字段，必须提供数据提供者函数，采用默认的字符格式化
      *
-     * @param cnFieldName  列名
      * @param providerFunc 数据提供者函数，提供字段数据
      */
-    public ExcelField(String cnFieldName, BiFunction<Map<Object, Object>, Integer, Object> providerFunc) {
+    public ExcelField(BiFunction<Map<Object, Object>, Integer, Object> providerFunc) {
         this.fieldType = FieldType.VirtualField;
-        this.cnFieldName = cnFieldName;
         this.formatFunc = FormatFunc.DEFAULT_FORMAT;
         this.providerFunc = providerFunc;
     }
@@ -85,13 +73,11 @@ public class ExcelField {
     /**
      * 构造函数-虚拟字段，必须提供数据提供者函数,自定义格式化函数
      *
-     * @param cnFieldName  列名
      * @param formatFunc   格式化函数
      * @param providerFunc 数据提供者函数，提供字段数据
      */
-    public ExcelField(String cnFieldName, Function<Object, String> formatFunc, BiFunction<Map<Object, Object>, Integer, Object> providerFunc) {
+    public ExcelField(Function<Object, String> formatFunc, BiFunction<Map<Object, Object>, Integer, Object> providerFunc) {
         this.fieldType = FieldType.VirtualField;
-        this.cnFieldName = cnFieldName;
         this.formatFunc = formatFunc;
         this.providerFunc = providerFunc;
     }
@@ -118,10 +104,6 @@ public class ExcelField {
         }
 
         return FormatFunc.EMPTY_BLANK;
-    }
-
-    public String getCnFieldName() {
-        return cnFieldName;
     }
 
     public FieldType getFieldType() {

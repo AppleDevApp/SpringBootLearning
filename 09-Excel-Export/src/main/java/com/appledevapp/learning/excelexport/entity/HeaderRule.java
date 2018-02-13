@@ -2,13 +2,17 @@ package com.appledevapp.learning.excelexport.entity;
 
 import org.apache.poi.ss.util.CellRangeAddress;
 
-public class HeaderRule {
+import java.util.ArrayList;
+import java.util.List;
+
+public class HeaderRule extends MergeRule {
 
     private String columnName;
-    private Integer firstRow;
-    private Integer lastRow;
-    private Integer firstColumn;
-    private Integer lastColumn;
+
+    public HeaderRule(String columnName) {
+        super();
+        this.columnName = columnName;
+    }
 
     public String getColumnName() {
         return columnName;
@@ -18,44 +22,25 @@ public class HeaderRule {
         this.columnName = columnName;
     }
 
-    public Integer getFirstRow() {
-        return firstRow;
-    }
-
-    public void setFirstRow(Integer firstRow) {
-        this.firstRow = firstRow;
-    }
-
-    public Integer getLastRow() {
-        return lastRow;
-    }
-
-    public void setLastRow(Integer lastRow) {
-        this.lastRow = lastRow;
-    }
-
-    public Integer getFirstColumn() {
-        return firstColumn;
-    }
-
-    public void setFirstColumn(Integer firstColumn) {
-        this.firstColumn = firstColumn;
-    }
-
-    public Integer getLastColumn() {
-        return lastColumn;
-    }
-
-    public void setLastColumn(Integer lastColumn) {
-        this.lastColumn = lastColumn;
-    }
-
-    public CellRangeAddress buildRule() {
-        return new CellRangeAddress(this.getFirstRow(),
-                this.getLastRow(),
+    public CellRangeAddress buildRule(int rowPaddingTop) {
+        return new CellRangeAddress(
+                rowPaddingTop + this.getFirstRow(),
+                rowPaddingTop + this.getLastRow(),
                 this.getFirstColumn(),
                 this.getLastColumn()
         );
+    }
+
+    public static List<HeaderRule> buildHeader(int firstRow, List<String> columnNames) {
+        List<HeaderRule> headerRuleList = new ArrayList<>();
+        HeaderRule headerRule;
+        for (int i = 0, columnNamesSize = columnNames.size(); i < columnNamesSize; i++) {
+            headerRule = new HeaderRule(columnNames.get(i));
+            headerRule.setFirstRow(firstRow);
+            headerRule.setFirstColumn(i);
+            headerRuleList.add(headerRule);
+        }
+        return headerRuleList;
     }
 
 }
