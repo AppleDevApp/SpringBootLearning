@@ -1,9 +1,10 @@
 package com.appledevapp.learning.excelexport.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExcelConfig {
+public class ExcelConfig implements Serializable {
 
     /**
      * 每一页最大行数

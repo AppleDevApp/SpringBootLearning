@@ -1,12 +1,13 @@
 package com.appledevapp.learning.excelexport.entity;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 /**
  * Excel中每个数据块区域
  */
-public class ExcelArea {
+public class ExcelArea implements Serializable {
 
     private List<HeaderRule> headerRuleList;
     private List<RowRule> rowRuleList;

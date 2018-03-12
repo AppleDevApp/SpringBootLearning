@@ -1,6 +1,8 @@
 package com.appledevapp.learning.excelexport.entity;
 
-public class MergeRule {
+import java.io.Serializable;
+
+public class MergeRule implements Serializable {
 
     private int firstRow;
     private int lastRow;

@@ -2,6 +2,7 @@ package com.appledevapp.learning.excelexport.entity;
 
 import com.appledevapp.learning.excelexport.function.FormatFunc;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -9,7 +10,7 @@ import java.util.function.Function;
 /**
  * Excel映射字段
  */
-public class ExcelField {
+public class ExcelField implements Serializable {
 
     /**
      * 字段类型，虚拟字段OR原生字段
