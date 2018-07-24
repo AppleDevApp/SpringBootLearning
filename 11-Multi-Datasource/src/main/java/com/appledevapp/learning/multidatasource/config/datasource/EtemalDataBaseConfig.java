@@ -1,5 +1,6 @@
 package com.appledevapp.learning.multidatasource.config.datasource;
 
+import com.appledevapp.learning.multidatasource.extension.UniqueNameGenerator;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -13,8 +14,11 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
+/**
+ * 配置数据源和Mybatis包扫描
+ */
 @Configuration
-@MapperScan(basePackages = {"com.appledevapp.learning.multidatasource.persistence.etemaldb"}, sqlSessionTemplateRef = "etemalSqlSessionTemplate")
+@MapperScan(basePackages = {"com.appledevapp.learning.multidatasource.persistence.etemaldb"}, sqlSessionTemplateRef = "etemalSqlSessionTemplate", nameGenerator = UniqueNameGenerator.class)
 public class EtemalDataBaseConfig {
 
     @Bean(name = "etemalDataSource")
@@ -32,7 +36,7 @@ public class EtemalDataBaseConfig {
     public SqlSessionFactory etemalSqlSessionFactory(@Qualifier("etemalDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        //factoryBean.setTypeAliasesPackage("demo.model");
+        factoryBean.setTypeAliasesPackage("config.model");
 
         return factoryBean.getObject();
     }
